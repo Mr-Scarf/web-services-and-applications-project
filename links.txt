@@ -1,0 +1,12 @@
+
+1. https://www.youtube.com/watch?v=2HfSFdPEFRg - How to use a Public API | Using a Public API with Python
+         - coinmarket API
+
+2. https://www.youtube.com/watch?v=JVQNywo4AbU - Request API data using Python in 8 minutes! ↩️
+         - pokemon api
+         - import requests pip (package manager)
+         
+
+
+
+
