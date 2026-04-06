@@ -1,5 +1,154 @@
-<html>
-    <body>
-        hi there
-    </body>
+
+// Reference : I’ve a project using the Flask app with a MySQL backend and I need a simple frontend using AJAX. 
+// Can you give me a working index.html that supports GET, POST, and DELETE for a “pints” API?
+// https://chatgpt.com/share/69d3c2c2-2aec-832f-b705-0870f6f07867
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pints App</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input { margin: 5px; }
+        button { margin: 3px; }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pints App 🍺</h1>
+
+<h2>Add Pint</h2>
+Pub Name: <input type="text" id="pub_name">
+Price: <input type="number" id="price" step="0.01">
+<button onclick="createPint()">Add</button>
+
+<h2>All Pints</h2>
+<button onclick="getAllPints()">Refresh</button>
+
+<table id="pintTable">
+    <tr>
+        <th>ID</th>
+        <th>Pub Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+</table>
+
+<script>
+
+// GET all pints
+function getAllPints() {
+    fetch('/pints')
+        .then(res => res.json())
+        .then(data => {
+            const table = document.getElementById("pintTable");
+
+            table.innerHTML = `
+                <tr>
+                    <th>ID</th>
+                    <th>Pub Name</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            `;
+
+            data.forEach(pint => {
+                const row = table.insertRow();
+
+                row.insertCell(0).innerText = pint.id;
+
+                // Editable fields
+                row.insertCell(1).innerHTML =
+                    `<input type="text" id="name_${pint.id}" value="${pint.pub_name}">`;
+
+                row.insertCell(2).innerHTML =
+                    `<input type="number" step="0.01" id="price_${pint.id}" value="${pint.price}">`;
+
+                // Buttons
+                const actions = row.insertCell(3);
+
+                const updateBtn = document.createElement("button");
+                updateBtn.innerText = "Update";
+                updateBtn.onclick = () => updatePint(pint.id);
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.innerText = "Delete";
+                deleteBtn.onclick = () => deletePint(pint.id);
+
+                actions.appendChild(updateBtn);
+                actions.appendChild(deleteBtn);
+            });
+        });
+}
+
+// CREATE
+function createPint() {
+    const pub_name = document.getElementById("pub_name").value;
+    const price = document.getElementById("price").value;
+
+    fetch('/pints', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            pub_name: pub_name,
+            price: parseFloat(price)
+        })
+    })
+    .then(res => res.json())
+    .then(() => {
+        clearForm();
+        getAllPints();
+    });
+}
+
+// UPDATE
+function updatePint(id) {
+    const pub_name = document.getElementById(`name_${id}`).value;
+    const price = document.getElementById(`price_${id}`).value;
+
+    fetch('/pints/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            pub_name: pub_name,
+            price: parseFloat(price)
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Updated:", data);
+        getAllPints();
+    });
+}
+
+// DELETE
+function deletePint(id) {
+    fetch('/pints/' + id, {
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(() => {
+        getAllPints();
+    });
+}
+
+// Clear input form
+function clearForm() {
+    document.getElementById("pub_name").value = "";
+    document.getElementById("price").value = "";
+}
+
+// Load on startup
+window.onload = getAllPints;
+
+</script>
+
+</body>
 </html>
