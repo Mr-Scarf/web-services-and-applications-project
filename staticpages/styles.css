@@ -1,0 +1,107 @@
+
+/* https://chatgpt.com/share/69d3cefa-70b0-8331-b26d-7098ed5ca15a
+
+/* styles.css */
+
+/* styles.css */
+
+/* Global body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+    background: #f4f6f8;
+    color: #333;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+h1 {
+    margin-top: 40px;
+}
+
+/* Input fields */
+input[type="text"], input[type="number"] {
+    padding: 8px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 150px;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Buttons */
+button {
+    padding: 8px 12px;
+    margin: 5px 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td button {
+    margin-right: 5px;
+}
+
+/* GIF / ad container */
+.ad-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.ad-container img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.ad-caption {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+    input[type="text"], input[type="number"], button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
