@@ -1,4 +1,4 @@
-# Adapted code from lecture notes 'Topic06-data-layer/zstudentDAO.py
+# Adapted code from lecture notes 'Topic06-data-layer/zstudentDAO.py & 'Topic 11 sqlite3 and pythonanywhere'
 # Create table added from lecture create table notes
 
 import sqlite3
