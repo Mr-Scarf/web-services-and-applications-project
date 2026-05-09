@@ -1,23 +1,26 @@
 # Adapted code from lecture notes 'Topic06-data-layer/zstudentDAO.py & 'Topic 11 sqlite3 and pythonanywhere'
 # Create table added from lecture create table notes
+# Used chatpgt to assist with adding timestamps for creation or updates - https://chatgpt.com/share/69ff38db-0394-832e-81aa-e3e657374f56
 
 import sqlite3
+from datetime import datetime
+
 
 class PintDAO:
-    host =""
-    user = ""
-    password =""
-    database =""
+    #host =""  
+    #user = ""
+    #password =""
+    #database =""
 
     connection = ""
     cursor =""
 
-    def __init__(self): 
+    #def __init__(self): 
         #these should be read from a config file
-        self.host="localhost"
-        self.user="root"
-        self.password=""
-        self.database="pintsdb"
+        #self.host="localhost"
+        #self.user="root"
+        #self.password=""
+        #self.database="pintsdb"
     
     def getCursor(self): 
         self.connection = sqlite3.connect("pints.db")
@@ -37,7 +40,9 @@ class PintDAO:
         CREATE TABLE IF NOT EXISTS pint (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             pub_name TEXT,
-            price REAL
+            price REAL,
+            created_at TEXT,
+            updated_at TEXT
         )
         """
         cursor.execute(sql)
@@ -69,27 +74,39 @@ class PintDAO:
   #Create  
     def create(self, pint):
         cursor = self.getCursor()
-        sql="insert into pint (pub_name, price) values (?,?)"
-        values = (pint.get("pub_name"), pint.get("price"))
+
+        now = datetime.utcnow().isoformat()
+
+        sql="insert into pint (pub_name, price , created_at, updated_at) values (?,?,?,?)" # Add timestamp
+        values = (pint.get("pub_name"), pint.get("price"),now, now)
         cursor.execute(sql, values )
 
         self.connection.commit()
         newid = cursor.lastrowid
         pint["id"] = newid
+        pint["created_at"] = now # Add timestamp
+        pint["updated_at"] = now # Add timestamp
         self.closeAll()
         return pint
 
     #Update
     def update(self, id, pint):
         cursor = self.getCursor()
-        sql="update pint set pub_name= ?, price=? where id = ?"
+
+        now = datetime.utcnow().isoformat()
+
+        sql="update pint set pub_name= ?, price=?, updated_at = ? where id = ?"
     
-        values = (pint.get("pub_name"), pint.get("price"), id)
+        values = (pint.get("pub_name"), pint.get("price"), now, id)
         cursor.execute(sql, values)
         self.connection.commit()
         
         self.closeAll()
+        pint["id"] = id
+        pint["updated_at"] = now
+
         return pint
+    
     #Delete
     def delete(self, id):
         cursor = self.getCursor()
@@ -106,7 +123,7 @@ class PintDAO:
         if resultLine is None:
             return None
         
-        pintKeys = ["id", "pub_name", "price"]
+        pintKeys = ["id", "pub_name", "price", "created_at", "updated_at"]
         currentkey = 0
         pint = {}
         for attrib in resultLine:
