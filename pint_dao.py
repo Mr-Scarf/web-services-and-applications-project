@@ -75,7 +75,7 @@ class PintDAO:
     def create(self, pint):
         cursor = self.getCursor()
 
-        now = datetime.utcnow().isoformat()
+        now = datetime.now().isoformat()
 
         sql="insert into pint (pub_name, price , created_at, updated_at) values (?,?,?,?)" # Add timestamp
         values = (pint.get("pub_name"), pint.get("price"),now, now)
@@ -93,7 +93,7 @@ class PintDAO:
     def update(self, id, pint):
         cursor = self.getCursor()
 
-        now = datetime.utcnow().isoformat()
+        now = datetime.now().isoformat()
 
         sql="update pint set pub_name= ?, price=?, updated_at = ? where id = ?"
     
