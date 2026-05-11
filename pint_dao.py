@@ -124,12 +124,8 @@ class PintDAO:
             return None
         
         pintKeys = ["id", "pub_name", "price", "created_at", "updated_at"]
-        currentkey = 0
-        pint = {}
-        for attrib in resultLine:
-            pint[pintKeys[currentkey]] = attrib
-            currentkey = currentkey + 1 
-        return pint
+         
+        return dict(zip(pintKeys, resultLine))
 
 
 pintDAO = PintDAO()
