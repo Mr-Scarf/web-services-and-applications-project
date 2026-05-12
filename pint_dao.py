@@ -1,6 +1,7 @@
-# Adapted code from lecture notes 'Topic06-data-layer/zstudentDAO.py & 'Topic 11 sqlite3 and pythonanywhere'
+# PintDAO - Dat access Object for pints app.
+# Adapted code from lecture notes 'Topic 06 : Data-layer (studentDAO.py) & Topic 11 :  SQLite3 and pythonanywhere
 # Create table added from lecture create table notes
-# Used chatpgt to assist with adding timestamps for creation or updates - https://chatgpt.com/share/69ff38db-0394-832e-81aa-e3e657374f56
+# Used chatpgt to assist with adding timestamps for creation or updates of pints data - https://chatgpt.com/share/69ff38db-0394-832e-81aa-e3e657374f56
 
 import sqlite3
 from datetime import datetime

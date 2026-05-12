@@ -1,6 +1,7 @@
 
-# 22nd March - starting skeleton for project from lab 5
-# Will do pints prices of pubs in maynooth
+# Adapted from lecturer Flask examples
+ # Flask backend for CRUD operations
+
 
 from flask import Flask, url_for, request, redirect, abort , jsonify
 from pint_dao import pintDAO
