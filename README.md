@@ -11,8 +11,8 @@
 
 ## Purpose
 
-The project is to create a web application using FLASK & RESTful APIs to perform CRUD (Create, Read, Update, Delete) operations on 
-data stored in a SQlite database. 
+The project is to create a web application using Flask & RESTful APIs to perform CRUD (Create, Read, Update, Delete) operations on 
+data stored in a SQLite database. 
 
 
 This application allows users to view, add, update & delete Guinness prices for pubs.
@@ -21,35 +21,49 @@ This application allows users to view, add, update & delete Guinness prices for 
 
 Hosted on PythonAnywhere:
 
-https://mrscarf.eu.pythonanywhere.com/
+[Guinness Pint App](https://mrscarf.eu.pythonanywhere.com/)
 
 ## Features
 
  - View all pint prices
  - Add a new pub & pint price
  - Update existing pint price
- - Delete pub/pints ENTRY
+ - Delete pub pint entry
 
 ## API Endpoints
 
-    - GET/pints - List all pint prices
-    - GET/pints/<id> - List specific pint price by pub ID
-    - POST/pints - Create a new pint entry
-    - PUT/pints/<id> - Update an existing pint entry by pub ID
-    - DELETE/pints/<id> - Delete a specific pint entry
+- GET/pints - List all pint prices
+- GET/pints/<id> - List specific pint price by pub ID
+- POST/pints - Create a new pint entry
+- PUT/pints/<id> - Update an existing pint entry by pub ID
+- DELETE/pints/<id> - Delete a specific pint entry
 
 ## Project Structure
 
-project/
+```text
+├── staticpages/  
+│       ├── index.html      # Frontend webpage using AJAX & Javascript  
+│       ├── styles.css      # CSS styling layout of frontend webpage  
 
-- staticpages/
-    - index.html    # Frontend webpage
-    - styles.css    # Styling layout of frontend webpage
 
-- pint_app.py       # Flask application routes
-- pint_dao.py       # Data access object for SQLite database
-- pints.db          # SQLite database file
-- requirements.txt  # Project dependencies
+├── pint_app.py             # Flask application routes  
+├── pint_dao.py             # Data access object for SQLite database  
+├── pints.db                # SQLite database file  
+├── requirements.txt        # Project dependencies  
+├── createschema.py         # Script to create SQLite database table  
+└── README.md               # This file, project documentation & installation.  
+```
+
+## Technologies Used
+
+ - Python
+ - Flask
+ - SQLite
+ - CSS
+ - HTML
+ - JavaScript
+ - AJAX
+ - PythonAnywhere
 
 
 ## Installation & Setup
@@ -57,8 +71,8 @@ project/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/Mr-Scarf/web-services-and-applications.git
-cd web-services-and-applications/project
+git clone https://github.com/Mr-Scarf/web-services-and-applications-project.git
+cd web-services-and-applications-project
 ```
 
 2. **Create a virtual environment**
